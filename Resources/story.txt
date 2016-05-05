@@ -1,0 +1,34 @@
+Je tomu už dlouho drahý příteli, velice dlouho... a teď vše záleží jen a jen na 
+tobě! Jsi vyvolený! Jen ty znáš pravdu a  musíš zachránit svět!
+
+Slyš pozorně drahý učedníku, náš příběh začíná před mnoha a mnoha lety, to 
+tehdy mladý Bill založil nenápadnou firmu, Microsoft se jí říkávalo, chtěl 
+přiblížit počítače smrtelníkům ale jak šel čas tak se vše změnilo. 
+
+Psal se rok 2016, všude byl Windows 10, na školách, v domácnostech, na 
+pracovních počítačích... lidi málo četli... nečetli pozorně  podmínky užívání, 
+celý svět se zbláznil do Windows... Já byl tehdy u toho... snažil se varovat, 
+říkal jsem že Linux je lepší, snažil jsem se obrátit lidstvo na pravou víru 
+ale marně...
+
+Jak šel čas tak se všechno měnilo, windows získal drtivou většinu serverů a 
+stanic. A pak to náhle přišlo ... 18.3.2018 ve 14:31 minut stiskl Nadella své 
+velké červené tlačítko a spstil tak dlouho připravovaný plán! Servery běžící do 
+té doby ještě na Linuxu byli zahlceny mocným DDOS útokem, Linux na gitu byl 
+napaden, zálohy nebyli včas zapsány, změny včas commitnuty.
+
+Nastala doba temna... svět přišel o Linux a celý Open Source a protože všude 
+byl windows, tak s výjimkou několika málo lidí, které stejně považovali za 
+pomatence, si toho nikdo nevšiml.
+
+I já jsem byl mezi nimi.  Zapřísáhli jsme se chránit Open Source a vrátit jej 
+uživatelům, ale bylo nás velmi málo... postupně jsme všichni padli. Zbyl jsem 
+jenom já, a teď ty. Je tomu už téměř třicet let! Věci se od té doby změnili, 
+musíš být opatrný, naučil jsem tě co jsem jenom mohl, ale dál už musíš sám. 
+Já už jsem na tuto pouť příliš stár.
+
+Jdi a pátrej, hledej a sháněj se po artefaktech Linuxu, modli se k nim a 
+prohlédni skrze zdrojový kód světa! Obrať lidi zase k linuxu, musíš postupně, 
+město za městem. A nezapomeň, lidé se budou bránit, Windows z nich udělal 
+barbary! Tady si vezmi můj starý meč! Bude ti věrným společníkem! Ale teď už 
+jdi! Kéž dojdeš slávy a úspěchu! Kéž při tobě stojí Tux i Svatý Linus! 

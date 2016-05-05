@@ -1,0 +1,4 @@
+Tato hra vznikla jako semestrální práce do předmětů Praktikum v Programování
+a Algoritmizace a základy programování, na Univerzitě Pardubice.
+
+Autorem práce je v plném rozsahu Vladislav Mlejnecký.

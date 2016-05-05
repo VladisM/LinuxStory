@@ -1,0 +1,44 @@
+Text s nápovědou ke hraní.
+
+OVLÁDÁNÍ
+Pohyb W A S D
+Útok T
+Dveře O
+Brána G
+Modlit se P
+Instalovat linux I
+
+OBJEKTY
+# - zeď
++ - zavřené dveře
+/ - otevřené dveře
+T - strom
+= - voda
+^ - skála
+$ - artefakt
+% - server
+
+HODNÍ NPC
+p - puppy
+h - human
+c - cat
+a - angel
+
+ZLÍ NPC
+d - dog lvl 1
+B - bat lvl 2
+b - bug lvl 3
+G - Gnol lvl 4
+g - goblin lvl 5
+Z - Zombie lvl 6
+A - Archangel lvl 7
+D - Dragon lvl 8
+W - Witch lvl 9
+M - Minotaur lvl 10
+
+PRINCIP
+Vše funguje do kříže, nic nejde diagonálně. Když chci s něčím dělat tak k tomu
+musím dojít a stát do kříže k tomu. Cíl hry instalovat linux na servery, k tomu
+je potřeba síla tuxe, tu získat modlením se k artefaktům. 
+                                   
+Hodně štěstí! Budete ho potřebovat!
