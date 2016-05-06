@@ -1,4 +1,18 @@
 Tato hra vznikla jako semestrální práce do předmětů Praktikum v Programování
 a Algoritmizace a základy programování, na Univerzitě Pardubice.
 
-Autorem práce je v plném rozsahu Vladislav Mlejnecký.
+Autorem práce je Vladislav Mlejnecký. Obrázek tučňáka a dva easter eggy byli 
+převzaty z programu cowsay.
+
+Prozatím se hra nachází ve fázi vývoje. Dá se již hrát a děkuji Vám že ji
+hrajete, budu rád za zpětnou vazbu. Všekeré dotazy, náměty, návrhy či
+nalezené chyby, případně i nadávky (tahle hra se zdá opravdu návyková)
+můžete zasílat na můj email:
+    v.mlejnecky@seznam.cz
+    st49545@student.upce.cz
+Je jedno na který, případně mě můžete kontaktovat na facebooku ale ... na ten
+email určitě odpovím rychleji.
+
+Až bude hra jakožto semestrální práce úspěšně obhájena bude zdrojový kód 
+uveřejněn pod svobodnou licencí na GitHubu. Budu rád když se zapojíte
+do vývoje!

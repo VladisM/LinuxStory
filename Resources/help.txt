@@ -1,44 +1,58 @@
-Text s nápovědou ke hraní.
+Nápověda ke hře Linux Story!
 
-OVLÁDÁNÍ
-Pohyb W A S D
-Útok T
-Dveře O
-Brána G
-Modlit se P
-Instalovat linux I
+1. ÚVOD
+Tato hra, byť není nejrozsáhlejší je relativně složitá. Je to Dáno hlavně tím že 
+ve hře vystupuje poměrně velké množství různých mobů. Tito mobové vystupují jako
+obyčejné znaky. V podstatě vše jsou zde znaky.
 
-OBJEKTY
-# - zeď
-+ - zavřené dveře
-/ - otevřené dveře
-T - strom
-= - voda
-^ - skála
-$ - artefakt
-% - server
+Náročnost hry též spočívá v tom že porazit moba byť stejné úrovně, jest velice
+náročné, což je mimo jiné způsobeno tím že vzorec, pro výpočet DMG je NPC i 
+hráči společný. Hráč zde vůbec není ve výhodě jak jest zvykem v mnoha hrách.
 
-HODNÍ NPC
-p - puppy
-h - human
-c - cat
-a - angel
+2. CÍL HRY
+Cílem hry je spasit svět, v podstatě je vašim úkolem instalace linuxu na
+servery. K tomuto potřebujete sbírat sílu tuxe, kterou můžete získati modlením
+se k artefaktům linuxu různě rozmístěných po světě. Linux dokážete instalovat
+až s určitou sílou tuxe, nikoliv dříve. Pro každou lokaci je tato hranice
+mírně jiná. Po nainstalování všech 10 serverů vyhráváte. Ale tak jednoduché
+to nebude, neboť v cestě vám stojí spousta zlých nepřátel!
 
-ZLÍ NPC
-d - dog lvl 1
-B - bat lvl 2
-b - bug lvl 3
-G - Gnol lvl 4
-g - goblin lvl 5
-Z - Zombie lvl 6
-A - Archangel lvl 7
-D - Dragon lvl 8
-W - Witch lvl 9
-M - Minotaur lvl 10
+3. PRINCIP HRANÍ
+Hra je pojata jako tahová, nikoliv však že by jste měli určité tahy na činnosti
+ale tak že hra není dynamická, vy uděláte tah hra udělá tah. A takto je to ve
+všem. Dalším důležitým rysem pro hraní jest fakt že hra je udělaná tak aby se
+ovládala v mřížce. Vše ovládáte pouze pravoůhle, nelze chodit diagonálně a nelze
+ani interakci provádět diagonálně. 
 
-PRINCIP
-Vše funguje do kříže, nic nejde diagonálně. Když chci s něčím dělat tak k tomu
-musím dojít a stát do kříže k tomu. Cíl hry instalovat linux na servery, k tomu
-je potřeba síla tuxe, tu získat modlením se k artefaktům. 
-                                   
-Hodně štěstí! Budete ho potřebovat!
+3.1 LOKACE
+Lokace si možná zasluhují většího vysvětlení. Lokace na mapě vystupují
+hvezdičkou, respektive, hvězdičkou vystupují brány mezi lokacemi. Každá brána
+vede do určité lokace. Lokace jsou určité podoblasti hlavního světa ve kterém se
+objevíte ze začátku. Lokace obsahují několik dungů a několik měst ve kterých
+jsou různě rozmístěny servery, artefakty i NPC. Veškerá hra se odehrává v 
+lokacích, hlavní svět je více méně jen pro transport mezi nimi.
+
+4. OVLÁDÁNÍ
+W A S D  - Pohyb hráče.
+T		 - Útok na nejbližší NPC.
+O		 - Otevřít nebo zavřít dveře.
+G		 - Brána, projít bránou.
+P		 - Modlení se k artefaktu.
+I		 - Instalace linuxu.
+
+5. OBJEKTY A NPC
+různé objekty           hodní NPC           zlí NPC
+# - zeď                 p - štěnátko        d - Pes         lvl 1
++ - zavřené dveře       h - člověk          B - Netopír     lvl 2
+/ - otevřené dveře      c - kočka           b - Brouk       lvl 3
+T - strom               a - anděl           G - Gnol        lvl 4
+= - voda                                    g - Goblin      lvl 5
+^ - skála                                   Z - Zombík      lvl 6
+$ - artefakt                                A - Arch Anděl  lvl 7
+% - server                                  D - Drak        lvl 8
+                                            W - Čarodějnice lvl 9
+                                            M - Minotaurus  lvl 10
+
+
+
+

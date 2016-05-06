@@ -14,20 +14,17 @@ namespace game
     /// </summary>
     enum MenuChoice { New, Load, Score, Story, Info, Help, Quit, Debug };
 
-#if (DEBUG)
-    /// <summary>
-    /// Výčet stavů které vrací rozhodování v debugu.
-    /// </summary>
-    enum DebugAction { AddSingleScoreRow, DebugExit, FillWithEmpty, LoadVladisSave };
-#endif    
-
     /// <summary>
     /// Statická třída pro globální proměnné.
     /// </summary>
     static class Global
     {
         static public bool HaveToSave = false;
-        
+        static public bool Monochrome = false;
+        static public ConsoleStuffs.TuxChoise TuxArgumentFromCommandLine = ConsoleStuffs.TuxChoise.Tux;
+#if (EN_COLOR_REPAIR)
+        static public bool RepairColors = false;
+#endif
     }
 
     /// <summary>
@@ -44,8 +41,48 @@ namespace game
         /// Vstupní metoda programu.
         /// </summary>
         /// <param name="args">Nejsou třeba.</param>
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
+            //budu postupně procházet všechny argumenty (když žádné nebudou tak se tohle neprovede)
+            for (int i = 0; i < args.Length; i++)
+            {
+                // u každého se rozhodnu co s ním
+                switch (args[i].ToString())
+                {
+                    case "cow":
+                        Global.TuxArgumentFromCommandLine = ConsoleStuffs.TuxChoise.Cow;
+                        break;
+                    case "head-in":
+                        Global.TuxArgumentFromCommandLine = ConsoleStuffs.TuxChoise.HeadIn;
+                        break;
+                    case "monochrome":
+                        Global.Monochrome = true;
+                        break;
+#if (EN_COLOR_REPAIR)
+                    case "repair-colors":
+                        Global.RepairColors = true;
+                        break;
+#endif
+                    case "help":
+                        Console.WriteLine("Tahová RPG hra o záchraně světa.\n");
+                        Console.WriteLine("Typické použití je bez parametrů.\n\nParametry:");
+                        Console.WriteLine("help          - vypíše tuto nápovědu");
+                        Console.WriteLine("monochrome    - hra bude pouze černobílá");
+#if (EN_COLOR_REPAIR)
+                        Console.WriteLine("repair-colors - při načítání staré uložené hry opraví barvy");
+#endif
+#if (EN_EASTEREGG_HELP)
+                        Console.WriteLine("cow           - vykreslí místo tuxe kravičku (easter egg)");
+                        Console.WriteLine("head-in       - vykreslí místo tuxe jinou kravičku (easter egg)");
+#endif
+                        Console.WriteLine("\n\nChyby v programu můžete hlásit na:\nv.mlejnecky@seznam.cz");
+                        return -1;
+                    default:
+                        Console.WriteLine("Špatné použití, pro nápovědu zadej parametr help.");
+                        return -1;
+                }
+            }
+            
             //nastavení konzole
             ConsoleStuffs.SetUpConsole();
 
@@ -55,6 +92,8 @@ namespace game
             //proměnná držící informaci o tom jestli je hra zapnutá nebo ne
             bool GameRunning = true;
 
+            // zde vykreslím menu, pokud si uživatel vybere tak si skočím do jiných 
+            // metod kam jest třeba, tam ho pak držím dokud třeba hraje apod.
             do
             {
                 switch (MakeMenu())
@@ -118,11 +157,16 @@ namespace game
 
             } while (GameRunning);
 
+            //uložení skóre
+            Score.SaveScoreData();
+            
             //krátké rozloučení na závěr
             ConsoleStuffs.DrawEndScreen();
 
-            //uložení skóre
-            Score.SaveScoreData();
+            //uvolnění konzole
+            ConsoleStuffs.FreeConsole();
+
+            return 1;
         }
 
         /// <summary>
@@ -130,37 +174,70 @@ namespace game
         /// </summary>
         private static void CreateAndPlayNewGame()
         {
+            //vykreslím úvodní info na obrazovku
             Console.Clear();
             ConsoleStuffs.DrawFrame();
             ConsoleStuffs.TextPrint("Nová hra", 3, 3);
             ConsoleStuffs.TextPrint("Zadej své jméno udatný bojovníku: ", 6, 3);
+
+            //sem uložím jméno hráče
             string PlayerName;
 
+            //dokavaď se uživateli nepovede dobře zadat jméno tak ho tu držím, ven se dostanu pomocí break
             while (true)
             {
+                //načtu jméno
                 PlayerName = Console.ReadLine();
 
-                if (Saver.CheckName(PlayerName)) break;
+                //čekuju jméno jestli není již použito
+                if (Saver.CheckName(PlayerName))
+                {
+                    //jméno taky musí být max. 15 znaků dlouhé
+                    if (PlayerName.Length > 15)
+                    {
+                        //tohle se vypíše když bude jméno krátké
+                        ConsoleStuffs.TextPrint("Bojovníkovo jméno musí být krátké a výstižné!", 10, 3);
+                        ConsoleStuffs.TextPrint("Pokračuj stiskem klávesy enter...", 11, 3);
+                        Console.ReadLine();
+                        ConsoleStuffs.TextPrint("                                             ", 10, 3);
+                        ConsoleStuffs.TextPrint("                                 ", 11, 3);
+                        ConsoleStuffs.TextPrint("                                   ", 6, 37);
+                        Console.SetCursorPosition(37, 6);
+
+                    }
+                    //když se dostanu až sem je vše jak má být a můžu pokračovat za while
+                    else break;
+                }
+                //vypsání informace pokud je jméno již použito jiným  uživatelem
                 else
                 {
-                    ConsoleStuffs.TextPrint("Zadané jméno nelze použít, zmáčkni enter pro opakování zadání.", 10, 3);
+                    //toto se vypíše pokud je jméno již použito
+                    ConsoleStuffs.TextPrint("Toto jméno nelze použít. Již jej nese jiný hrdina!", 10, 3);
+                    ConsoleStuffs.TextPrint("Pokračuj stiskem klávesy enter...", 11, 3);
                     Console.ReadLine();
-                    ConsoleStuffs.TextPrint("                                                              ", 10, 3);
+                    ConsoleStuffs.TextPrint("                                                  ", 10, 3);
+                    ConsoleStuffs.TextPrint("                                 ", 11, 3);
                     ConsoleStuffs.TextPrint("                                   ", 6, 37);
                     Console.SetCursorPosition(37, 6);
                 }
              
             }
+            //nějaké další povídání pokud jsem už úspěšně vytvořil jméno
             ConsoleStuffs.TextPrint("Nyní můžeš začít hrát! Pokračuj stiskem \"S\" Hodně štěstí! ", 10, 3);
             ConsoleStuffs.TextPrint("Pro návrat stiskni \"q\" pro pokračování \"s\" ...", 28, 2);
 
+            //tady držím hráče dokud bude hrát a nebo dokud nezmáčkne Q aby utekl z volby hráče
             while (true)
             {
+                //tuten se čte klávesa
                 switch (ConsoleStuffs.ReadKey().Key)
                 {
+                    //pokud zmáčknu Q vrátím se do menu
                     case ConsoleKey.Q:
                         return;
+                    //pokud zmáčknu S tak vytvořím novou hru
                     case ConsoleKey.S:
+                        //v této metodě je hráč držen tak dlouho dokud nedohraje
                         game.MakeNewGame(PlayerName);
                         return;
                     default: break;
@@ -192,8 +269,9 @@ namespace game
 #if (DEBUG)
             ConsoleStuffs.TextPrint("d - debug", 19, 8);
 #endif
-            //ConsoleStuffs.TextPrint(
-
+            //Vykreslení tučňáčka :)
+            ConsoleStuffs.DrawTux(50, 15, Global.TuxArgumentFromCommandLine);
+            
             //opakuju do nekonečna, ukončí se příkazem return
             while (true)
             {
@@ -434,11 +512,11 @@ namespace game
                 //procházím  řádek po řádku a ukládám do pole
                 while ((line = file.ReadLine()) != null && counter < 100)
                 {
-                    this.Text[counter] = line;
+                    Text[counter] = line;
                     counter++;
                 }
                 //uložím si počet načtených řádek, používám k tomu abych při posouvání textu v okně nejel moc daleko
-                this.LinesCount = counter;
+                LinesCount = counter;
                 //zavřu soubor
                 file.Close();
                 return true;
@@ -772,6 +850,56 @@ namespace game
                     MyStreamReader.Close();
                     MyStreamReader = null;
 
+#if (EN_COLOR_REPAIR)
+                    //pokud mám přikázáno z argumentů příkazové řádky opravit barvy, no tak to prostě udělám
+                    if (Global.RepairColors)
+                    {
+                        for (int world = 0; world < Program.game.Worlds.Count; world++)
+                        {
+                            for (int wall = 0; wall < Program.game.Worlds[world].Walls.Count; wall++)
+                            {
+                                Program.game.Worlds[world].Walls[wall].ColorForPrint = ConsoleColor.White;
+                            }
+                            for (int Door = 0; Door < Program.game.Worlds[world].Doors.Count; Door++)
+                            {
+                                Program.game.Worlds[world].Doors[Door].ColorForPrint = ConsoleColor.DarkGray;
+                            }
+                            for (int Mob = 0; Mob < Program.game.Worlds[world].Mobs.Count; Mob++)
+                            {
+                                if(Program.game.Worlds[world].Mobs[Mob].IsEvil == true)
+                                    Program.game.Worlds[world].Mobs[Mob].ColorForPrint = ConsoleColor.Red;
+                                else
+                                    Program.game.Worlds[world].Mobs[Mob].ColorForPrint = ConsoleColor.Blue;
+                            }
+                            for (int Tree_number = 0; Tree_number < Program.game.Worlds[world].Trees.Count; Tree_number++)
+                            {
+                                Program.game.Worlds[world].Trees[Tree_number].ColorForPrint = ConsoleColor.Green;
+                            }
+                            for (int Wattes = 0; Wattes < Program.game.Worlds[world].Watters.Count; Wattes++)
+                            {
+                                Program.game.Worlds[world].Watters[Wattes].ColorForPrint = ConsoleColor.Blue;
+                            }
+                            for (int Hill = 0; Hill < Program.game.Worlds[world].Hills.Count; Hill++)
+                            {
+                                Program.game.Worlds[world].Hills[Hill].ColorForPrint = ConsoleColor.DarkGray;
+                            }
+                            for (int Gate = 0; Gate < Program.game.Worlds[world].Gates.Count; Gate++)
+                            {
+                                Program.game.Worlds[world].Gates[Gate].ColorForPrint = ConsoleColor.Cyan;
+                            }
+                            for (int Server = 0; Server < Program.game.Worlds[world].Servers.Count; Server++)
+                            {
+                                Program.game.Worlds[world].Servers[Server].ColorForPrint = ConsoleColor.Yellow;
+                            }
+                            for (int Artifact = 0; Artifact < Program.game.Worlds[world].Artifacts.Count; Artifact++)
+                            {
+                                Program.game.Worlds[world].Artifacts[Artifact].ColorForPrint = ConsoleColor.Yellow;
+                            }
+                            Program.game.player.ColorForPrint = ConsoleColor.White;
+                        }
+                    }
+#endif
+
                     //vrátíme info o tom že se načtení povedlo
                     return true;
                 }
@@ -827,6 +955,11 @@ namespace game
     }
 
 #if (DEBUG)
+    /// <summary>
+    /// Výčet stavů které vrací rozhodování v debugu.
+    /// </summary>
+    enum DebugAction { AddSingleScoreRow, DebugExit, FillWithEmpty, LoadVladisSave };
+
     /// <summary>
     /// Třída která se stará o debugování.
     /// </summary>

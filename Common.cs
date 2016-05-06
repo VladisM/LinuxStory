@@ -12,16 +12,83 @@ namespace game
     static class ConsoleStuffs
     {
         /// <summary>
+        /// Výčtový typ rpo možné volby zobrazení tuxe na hlavní stránce.
+        /// </summary>
+        public enum TuxChoise { Tux, Cow, HeadIn };
+
+        /// <summary>
+        /// Záloha nastavení konzole.
+        /// </summary>
+        private static int BackUpConsoleWindowBufferHeight;
+        
+        /// <summary>
+        /// Záloha nastavení konzole.
+        /// </summary>
+        private static int BackUpConsoleWindowBufferWidth;
+
+        /// <summary>
+        /// Záloha nastavení konzole.
+        /// </summary>
+        private static string BackUpConsoleWindowTitle;
+
+        /// <summary>
+        /// Záloha nastavení konzole.
+        /// </summary>
+        private static int BackUpConsoleWindowSizeHeight;
+
+        /// <summary>
+        /// Záloha nastavení konzole.
+        /// </summary>
+        private static int BackUpConsoleWindowSizeWidth;
+
+        /// <summary>
+        /// Záloha nastavení konzole.
+        /// </summary>
+        private static ConsoleColor BackUpConsoleWindowBackgroundColor;
+
+        /// <summary>
+        /// Záloha nastavení konzole.
+        /// </summary>
+        private static ConsoleColor BackUpConsoleWindowForegroundColor;
+
+        /// <summary>
         /// Nastavení konzolového okna,  musí být volána  před jakýmkoliv výpisem na obrazovku.
         /// </summary>
         public static void SetUpConsole()
         {
+            //vytvoření zálohy nastavení konzole,  toto nastavení se obnoví po ukončení hry
+            BackUpConsoleWindowBufferHeight = Console.BufferHeight;
+            BackUpConsoleWindowBufferWidth = Console.BufferWidth;
+            BackUpConsoleWindowTitle = Console.Title;
+            BackUpConsoleWindowSizeHeight = Console.WindowHeight;
+            BackUpConsoleWindowSizeWidth = Console.WindowWidth;
+            BackUpConsoleWindowBackgroundColor = Console.BackgroundColor;
+            BackUpConsoleWindowForegroundColor = Console.ForegroundColor;
+
+            //nastavení konzole tak jak potřebuji
             Console.Clear();
             Console.SetCursorPosition(0, 0);
             Console.SetWindowSize(90, 30);
             Console.BufferHeight = 30;
             Console.BufferWidth = 90;
             Console.Title = "Linux story";
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
+
+        /// <summary>
+        /// Uvolnění konzole, vrátí ji do původního stavu
+        /// </summary>
+        public static void FreeConsole()
+        {
+            Console.Clear();
+            Console.BufferHeight = BackUpConsoleWindowBufferHeight;
+            Console.BufferWidth = BackUpConsoleWindowBufferWidth;
+            Console.Title = BackUpConsoleWindowTitle;
+            Console.WindowHeight = BackUpConsoleWindowSizeHeight;
+            Console.WindowWidth = BackUpConsoleWindowSizeWidth;
+            Console.BackgroundColor = BackUpConsoleWindowBackgroundColor;
+            Console.ForegroundColor = BackUpConsoleWindowForegroundColor;
         }
 
         /// <summary>
@@ -95,10 +162,11 @@ namespace game
                 //ošetření proti tisku mimo povolenou oblast
                 if ((TextForPrint.Length + PositionX < 90) && (PositionY < 30) && (PositionX > 0) && (PositionY > 0))
                 {
+                    ConsoleColor BackUp = Console.ForegroundColor;
                     Console.ForegroundColor = Color;
                     Console.SetCursorPosition(PositionX, PositionY);
                     Console.Write(TextForPrint);
-                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = BackUp;
                 }
             }
         }
@@ -132,10 +200,11 @@ namespace game
             //ošetření proti tisku mimo povolenou oblast
             if ((1 + PositionX < 90) && (PositionY < 30) && (PositionX > 0) && (PositionY > 0))
             {
+                ConsoleColor BackUp = Console.ForegroundColor;
                 Console.ForegroundColor = Color;
                 Console.SetCursorPosition(PositionX, PositionY);
                 Console.Write(TextForPrint);
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.ForegroundColor = BackUp;
             }
         }
 
@@ -207,6 +276,58 @@ namespace game
             Console.SetCursorPosition(0, 0);
             Console.ReadLine();
         }
+
+        /// <summary>
+        /// Vykreslí tučňáka na zvolenou oblast.
+        /// </summary>
+        /// <param name="LeftUpX">Sem se umístí levý horní roh.</param>
+        /// <param name="LeftUpY">Sem se umístí levý horní roh.</param>
+        /// <param name="Choise">Tady je ještě pár méně vhodných obrázků.</param>
+        public static void DrawTux(int LeftUpX, int LeftUpY, TuxChoise Choise)
+        {
+            switch (Choise)
+            {
+                case TuxChoise.Tux:
+                    TextPrint(@" _________________________", LeftUpY++, LeftUpX);
+                    TextPrint(@"< Za linux život položím! >", LeftUpY++, LeftUpX);
+                    TextPrint(@" -------------------------", LeftUpY++, LeftUpX);
+                    TextPrint(@"     \", LeftUpY++, LeftUpX);
+                    TextPrint(@"      \", LeftUpY++, LeftUpX);
+                    TextPrint(@"          .--.", LeftUpY++, LeftUpX);
+                    TextPrint(@"         |o_o |", LeftUpY++, LeftUpX);
+                    TextPrint(@"         |:_/ |", LeftUpY++, LeftUpX);
+                    TextPrint(@"        //   \ \", LeftUpY++, LeftUpX);
+                    TextPrint(@"       (|     | )", LeftUpY++, LeftUpX);
+                    TextPrint(@"      /'\_   _/`\", LeftUpY++, LeftUpX);
+                    TextPrint(@"      \___)=(___/", LeftUpY++, LeftUpX);
+                    break;
+                case TuxChoise.Cow:
+                    TextPrint(@" __________________________", LeftUpY++, LeftUpX);
+                    TextPrint(@"/ Tahle hra je ale pořádná \", LeftUpY++, LeftUpX);
+                    TextPrint(@"\ VOLOVINA, viď že jo?     /", LeftUpY++, LeftUpX);
+                    TextPrint(@" --------------------------", LeftUpY++, LeftUpX);
+                    TextPrint(@"        \   ^__^", LeftUpY++, LeftUpX);
+                    TextPrint(@"         \  (oo)\_______", LeftUpY++, LeftUpX);
+                    TextPrint(@"            (__)\       )\/\", LeftUpY++, LeftUpX);
+                    TextPrint(@"                ||----w |", LeftUpY++, LeftUpX);
+                    TextPrint(@"                ||     ||", LeftUpY++, LeftUpX);
+                    break;
+                case TuxChoise.HeadIn:
+                    TextPrint(@"  ___________________________", LeftUpY++, LeftUpX);
+                    TextPrint(@" / Místo těchto volovin jsem \", LeftUpY++, LeftUpX);
+                    TextPrint(@" \ se raději měl učit fyziku /", LeftUpY++, LeftUpX);
+                    TextPrint(@"  ---------------------------", LeftUpY++, LeftUpX);
+                    TextPrint(@"    \", LeftUpY++, LeftUpX);
+                    TextPrint(@"     \", LeftUpY++, LeftUpX);
+                    TextPrint(@"    ^__^         /", LeftUpY++, LeftUpX);
+                    TextPrint(@"    (oo)\_______/  _________", LeftUpY++, LeftUpX);
+                    TextPrint(@"    (__)\       )=(  ____|_ \_____", LeftUpY++, LeftUpX);
+                    TextPrint(@"        ||----w |  \ \     \_____ |", LeftUpY++, LeftUpX);
+                    TextPrint(@"        ||     ||   ||           ||", LeftUpY++, LeftUpX);
+                    break;
+            }
+        }
+            
     }
 
     /// <summary>

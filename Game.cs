@@ -109,47 +109,62 @@ namespace game
                 Messenger.Clean();
 
                 //uživatel udělá tah
-                switch (ConsoleStuffs.ReadKey().Key)
+                bool SelectedRighKey = false;
+                do
                 {
-                    case ConsoleKey.W:
-                        MoveIfPossible(player, -1, 0);
-                        break;
-                    case ConsoleKey.S:
-                        MoveIfPossible(player, 1, 0);
-                        break;
-                    case ConsoleKey.A:
-                        MoveIfPossible(player, 0, -1);
-                        break;
-                    case ConsoleKey.D:
-                        MoveIfPossible(player, 0, 1);
-                        break;
-                    case ConsoleKey.O:
-                        ToggleNearDoor(player);
-                        break;
-                    case ConsoleKey.T:
-                        FindNearAndAttack(player, Worlds[ActualWorld].Mobs);
-                        break;
-                    case ConsoleKey.G:
-                        UseNearGate(player);
-                        break;
-                    case ConsoleKey.P:
-                        PrayNearArtifact(player);
-                        break;
-                    case ConsoleKey.I:
-                        InstallNearServer(player);
-                        break;
-                    case ConsoleKey.Q:
-                        string Backup = Messenger.GetActual();
-                        Messenger.Update("Jsi si opravdu jistý že chceš ukončit hru? [A/N]");
-                        Messenger.Refresh();
-                        switch (ConsoleStuffs.ReadKey().Key) {
-                            case ConsoleKey.A: WorldExist = false; break;
-                            case ConsoleKey.N: Messenger.Update(Backup); Messenger.Refresh(); break;
-                            default: Messenger.Update(Backup); Messenger.Refresh(); break;
-                        }
-                        break;
-                    default: break;
-                }
+                    switch (ConsoleStuffs.ReadKey().Key)
+                    {
+                        case ConsoleKey.W:
+                            MoveIfPossible(player, -1, 0);
+                            SelectedRighKey = true;
+                            break;
+                        case ConsoleKey.S:
+                            MoveIfPossible(player, 1, 0);
+                            SelectedRighKey = true;
+                            break;
+                        case ConsoleKey.A:
+                            MoveIfPossible(player, 0, -1);
+                            SelectedRighKey = true;
+                            break;
+                        case ConsoleKey.D:
+                            MoveIfPossible(player, 0, 1);
+                            SelectedRighKey = true;
+                            break;
+                        case ConsoleKey.O:
+                            ToggleNearDoor(player);
+                            SelectedRighKey = true;
+                            break;
+                        case ConsoleKey.T:
+                            FindNearAndAttack(player, Worlds[ActualWorld].Mobs);
+                            SelectedRighKey = true;
+                            break;
+                        case ConsoleKey.G:
+                            UseNearGate(player);
+                            SelectedRighKey = true;
+                            break;
+                        case ConsoleKey.P:
+                            PrayNearArtifact(player);
+                            SelectedRighKey = true;
+                            break;
+                        case ConsoleKey.I:
+                            InstallNearServer(player);
+                            SelectedRighKey = true;
+                            break;
+                        case ConsoleKey.Q:
+                            string Backup = Messenger.GetActual();
+                            Messenger.Update("Jsi si opravdu jistý že chceš ukončit hru? [A/N]");
+                            Messenger.Refresh();
+                            switch (ConsoleStuffs.ReadKey().Key)
+                            {
+                                case ConsoleKey.A: WorldExist = false; break;
+                                case ConsoleKey.N: Messenger.Update(Backup); Messenger.Refresh(); break;
+                                default: Messenger.Update(Backup); Messenger.Refresh(); break;
+                            }
+                            SelectedRighKey = true;
+                            break;
+                        default: break;
+                    }
+                } while (!SelectedRighKey);
 
                 //mobové provedou útoky
                 bool PlayerDied = AttackIfNear(Worlds[ActualWorld].Mobs, player);
@@ -745,8 +760,9 @@ namespace game
         /// <param name="Entity">Objekt entity pro vytisknutí.</param>
         private void DrawPlayer()
         {
-            //tohle je jen vlastně malý hack pro zvýšení čitelnosti kódu
-            ConsoleStuffs.TextPrint(player.BodyChar, player.PositionY, player.PositionX, player.ColorForPrint);
+            //tohle je jen vlastně malý hack pro zvýšení čitelnosti kódu plus se ještě rozliší barva
+            if(Global.Monochrome) ConsoleStuffs.TextPrint(player.BodyChar, player.PositionY, player.PositionX);
+            else ConsoleStuffs.TextPrint(player.BodyChar, player.PositionY, player.PositionX, player.ColorForPrint);
         }
 
         /// <summary>
@@ -759,7 +775,8 @@ namespace game
             //projdu všechny zdi uložené v listu
             while (ActualWallNumber < Worlds[ActualWorld].Walls.Count())
             {
-                ConsoleStuffs.TextPrint(Worlds[ActualWorld].Walls[ActualWallNumber].BodyChar, Worlds[ActualWorld].Walls[ActualWallNumber].PositionY, Worlds[ActualWorld].Walls[ActualWallNumber].PositionX, Worlds[ActualWorld].Walls[ActualWallNumber].ColorForPrint);
+                if(Global.Monochrome) ConsoleStuffs.TextPrint(Worlds[ActualWorld].Walls[ActualWallNumber].BodyChar, Worlds[ActualWorld].Walls[ActualWallNumber].PositionY, Worlds[ActualWorld].Walls[ActualWallNumber].PositionX);
+                else ConsoleStuffs.TextPrint(Worlds[ActualWorld].Walls[ActualWallNumber].BodyChar, Worlds[ActualWorld].Walls[ActualWallNumber].PositionY, Worlds[ActualWorld].Walls[ActualWallNumber].PositionX, Worlds[ActualWorld].Walls[ActualWallNumber].ColorForPrint);
                 ActualWallNumber++;
             }
         }
@@ -774,7 +791,8 @@ namespace game
             //projdu všechny veře uložené v listu
             while (ActualDoorNumber < Worlds[ActualWorld].Doors.Count())
             {
-                ConsoleStuffs.TextPrint(Worlds[ActualWorld].Doors[ActualDoorNumber].BodyChar, Worlds[ActualWorld].Doors[ActualDoorNumber].PositionY, Worlds[ActualWorld].Doors[ActualDoorNumber].PositionX, Worlds[ActualWorld].Doors[ActualDoorNumber].ColorForPrint);
+                if(Global.Monochrome) ConsoleStuffs.TextPrint(Worlds[ActualWorld].Doors[ActualDoorNumber].BodyChar, Worlds[ActualWorld].Doors[ActualDoorNumber].PositionY, Worlds[ActualWorld].Doors[ActualDoorNumber].PositionX);
+                else ConsoleStuffs.TextPrint(Worlds[ActualWorld].Doors[ActualDoorNumber].BodyChar, Worlds[ActualWorld].Doors[ActualDoorNumber].PositionY, Worlds[ActualWorld].Doors[ActualDoorNumber].PositionX, Worlds[ActualWorld].Doors[ActualDoorNumber].ColorForPrint);
                 ActualDoorNumber++;
             }
         }
@@ -789,7 +807,8 @@ namespace game
             //projdu všechny moby uložené v listu
             while (ActualMobNumber < Worlds[ActualWorld].Mobs.Count())
             {
-                ConsoleStuffs.TextPrint(Worlds[ActualWorld].Mobs[ActualMobNumber].BodyChar, Worlds[ActualWorld].Mobs[ActualMobNumber].PositionY, Worlds[ActualWorld].Mobs[ActualMobNumber].PositionX, Worlds[ActualWorld].Mobs[ActualMobNumber].ColorForPrint);
+                if(Global.Monochrome) ConsoleStuffs.TextPrint(Worlds[ActualWorld].Mobs[ActualMobNumber].BodyChar, Worlds[ActualWorld].Mobs[ActualMobNumber].PositionY, Worlds[ActualWorld].Mobs[ActualMobNumber].PositionX);
+                else ConsoleStuffs.TextPrint(Worlds[ActualWorld].Mobs[ActualMobNumber].BodyChar, Worlds[ActualWorld].Mobs[ActualMobNumber].PositionY, Worlds[ActualWorld].Mobs[ActualMobNumber].PositionX, Worlds[ActualWorld].Mobs[ActualMobNumber].ColorForPrint);
                 ActualMobNumber++;
             }
         }
@@ -804,7 +823,8 @@ namespace game
             //projdu všechny zdi uložené v listu
             while (ActualTreeNumber < Worlds[ActualWorld].Trees.Count())
             {
-                ConsoleStuffs.TextPrint(Worlds[ActualWorld].Trees[ActualTreeNumber].BodyChar, Worlds[ActualWorld].Trees[ActualTreeNumber].PositionY, Worlds[ActualWorld].Trees[ActualTreeNumber].PositionX, Worlds[ActualWorld].Trees[ActualTreeNumber].ColorForPrint);
+                if(Global.Monochrome) ConsoleStuffs.TextPrint(Worlds[ActualWorld].Trees[ActualTreeNumber].BodyChar, Worlds[ActualWorld].Trees[ActualTreeNumber].PositionY, Worlds[ActualWorld].Trees[ActualTreeNumber].PositionX);
+                else ConsoleStuffs.TextPrint(Worlds[ActualWorld].Trees[ActualTreeNumber].BodyChar, Worlds[ActualWorld].Trees[ActualTreeNumber].PositionY, Worlds[ActualWorld].Trees[ActualTreeNumber].PositionX, Worlds[ActualWorld].Trees[ActualTreeNumber].ColorForPrint);
                 ActualTreeNumber++;
             }
         }
@@ -819,7 +839,8 @@ namespace game
             //projdu všechny zdi uložené v listu
             while (ActualHillNumber < Worlds[ActualWorld].Hills.Count())
             {
-                ConsoleStuffs.TextPrint(Worlds[ActualWorld].Hills[ActualHillNumber].BodyChar, Worlds[ActualWorld].Hills[ActualHillNumber].PositionY, Worlds[ActualWorld].Hills[ActualHillNumber].PositionX, Worlds[ActualWorld].Hills[ActualHillNumber].ColorForPrint);
+                if(Global.Monochrome) ConsoleStuffs.TextPrint(Worlds[ActualWorld].Hills[ActualHillNumber].BodyChar, Worlds[ActualWorld].Hills[ActualHillNumber].PositionY, Worlds[ActualWorld].Hills[ActualHillNumber].PositionX);
+                else ConsoleStuffs.TextPrint(Worlds[ActualWorld].Hills[ActualHillNumber].BodyChar, Worlds[ActualWorld].Hills[ActualHillNumber].PositionY, Worlds[ActualWorld].Hills[ActualHillNumber].PositionX, Worlds[ActualWorld].Hills[ActualHillNumber].ColorForPrint);
                 ActualHillNumber++;
             }
         }
@@ -834,7 +855,8 @@ namespace game
             //projdu všechny zdi uložené v listu
             while (ActualWatterNumber < Worlds[ActualWorld].Watters.Count())
             {
-                ConsoleStuffs.TextPrint(Worlds[ActualWorld].Watters[ActualWatterNumber].BodyChar, Worlds[ActualWorld].Watters[ActualWatterNumber].PositionY, Worlds[ActualWorld].Watters[ActualWatterNumber].PositionX, Worlds[ActualWorld].Watters[ActualWatterNumber].ColorForPrint);
+                if(Global.Monochrome) ConsoleStuffs.TextPrint(Worlds[ActualWorld].Watters[ActualWatterNumber].BodyChar, Worlds[ActualWorld].Watters[ActualWatterNumber].PositionY, Worlds[ActualWorld].Watters[ActualWatterNumber].PositionX);
+                else ConsoleStuffs.TextPrint(Worlds[ActualWorld].Watters[ActualWatterNumber].BodyChar, Worlds[ActualWorld].Watters[ActualWatterNumber].PositionY, Worlds[ActualWorld].Watters[ActualWatterNumber].PositionX, Worlds[ActualWorld].Watters[ActualWatterNumber].ColorForPrint);
                 ActualWatterNumber++;
             }
         }
@@ -849,7 +871,8 @@ namespace game
             //projdu všechny brány uložené v listu
             while (ActualGateNumber < Worlds[ActualWorld].Gates.Count())
             {
-                ConsoleStuffs.TextPrint(Worlds[ActualWorld].Gates[ActualGateNumber].BodyChar, Worlds[ActualWorld].Gates[ActualGateNumber].PositionY, Worlds[ActualWorld].Gates[ActualGateNumber].PositionX, Worlds[ActualWorld].Gates[ActualGateNumber].ColorForPrint);
+                if(Global.Monochrome) ConsoleStuffs.TextPrint(Worlds[ActualWorld].Gates[ActualGateNumber].BodyChar, Worlds[ActualWorld].Gates[ActualGateNumber].PositionY, Worlds[ActualWorld].Gates[ActualGateNumber].PositionX);
+                else ConsoleStuffs.TextPrint(Worlds[ActualWorld].Gates[ActualGateNumber].BodyChar, Worlds[ActualWorld].Gates[ActualGateNumber].PositionY, Worlds[ActualWorld].Gates[ActualGateNumber].PositionX, Worlds[ActualWorld].Gates[ActualGateNumber].ColorForPrint);
                 ActualGateNumber++;
             }
 
@@ -865,7 +888,8 @@ namespace game
             //projdu všechny brány uložené v listu
             while (ActualServerNumber < Worlds[ActualWorld].Servers.Count())
             {
-                ConsoleStuffs.TextPrint(Worlds[ActualWorld].Servers[ActualServerNumber].BodyChar, Worlds[ActualWorld].Servers[ActualServerNumber].PositionY, Worlds[ActualWorld].Servers[ActualServerNumber].PositionX, Worlds[ActualWorld].Servers[ActualServerNumber].ColorForPrint);
+                if(Global.Monochrome) ConsoleStuffs.TextPrint(Worlds[ActualWorld].Servers[ActualServerNumber].BodyChar, Worlds[ActualWorld].Servers[ActualServerNumber].PositionY, Worlds[ActualWorld].Servers[ActualServerNumber].PositionX);
+                else ConsoleStuffs.TextPrint(Worlds[ActualWorld].Servers[ActualServerNumber].BodyChar, Worlds[ActualWorld].Servers[ActualServerNumber].PositionY, Worlds[ActualWorld].Servers[ActualServerNumber].PositionX, Worlds[ActualWorld].Servers[ActualServerNumber].ColorForPrint);
                 ActualServerNumber++;
             }
 
@@ -881,7 +905,8 @@ namespace game
             //projdu všechny brány uložené v listu
             while (ActualArtifactNumber < Worlds[ActualWorld].Artifacts.Count())
             {
-                ConsoleStuffs.TextPrint(Worlds[ActualWorld].Artifacts[ActualArtifactNumber].BodyChar, Worlds[ActualWorld].Artifacts[ActualArtifactNumber].PositionY, Worlds[ActualWorld].Artifacts[ActualArtifactNumber].PositionX, Worlds[ActualWorld].Artifacts[ActualArtifactNumber].ColorForPrint);
+                if(Global.Monochrome) ConsoleStuffs.TextPrint(Worlds[ActualWorld].Artifacts[ActualArtifactNumber].BodyChar, Worlds[ActualWorld].Artifacts[ActualArtifactNumber].PositionY, Worlds[ActualWorld].Artifacts[ActualArtifactNumber].PositionX);
+                else ConsoleStuffs.TextPrint(Worlds[ActualWorld].Artifacts[ActualArtifactNumber].BodyChar, Worlds[ActualWorld].Artifacts[ActualArtifactNumber].PositionY, Worlds[ActualWorld].Artifacts[ActualArtifactNumber].PositionX, Worlds[ActualWorld].Artifacts[ActualArtifactNumber].ColorForPrint);
                 ActualArtifactNumber++;
             }
 
@@ -912,7 +937,7 @@ namespace game
                 ActualMobNumber++;
             }
         }
-
+        
         /// <summary>
         /// Smaže player info
         /// </summary>
@@ -2301,8 +2326,12 @@ namespace game
                     //mob je mrtev smazat jej z listu
                     ListOfSlaves.RemoveAt(FoundID);
 
-                    if (LevelUp == true) Messenger.Update("Plácnutím moba jsi se levnul!");     //napíšu  něco trošku jiného
-                    else Messenger.Update("Plácl jsi moba a ten to už nedal!");                 //napíšu strohý epitaf mobovi
+                    if (LevelUp == true)
+                    {
+                        Messenger.Update("Plácnutím moba jsi se levnul!");     //napíšu  něco trošku jiného
+                        player.HealthPoint = player.MaximumHealthPoint;         //doplním hráči HP ať to nemá tak složité
+                    }
+                    else Messenger.Update("Plácl jsi moba a ten to už nedal!"); //napíšu strohý epitaf mobovi
                 }
                 //nezabil-li jsem jej tak jen vypíšu info 
                 else Messenger.Update("Plácl jsi moba za " + demage.ToString() + " bodů!");
@@ -2389,7 +2418,7 @@ namespace game
             {
                 player.HealCounter = 0;
                 //zároveň ale hráč musí být trošku zraněn, když bude mít max hp tak mu přeci přidávat nebudu
-                if (player.HealthPoint < player.MaximumHealthPoint) player.HealthPoint++;
+                if (player.HealthPoint < player.MaximumHealthPoint) player.HealthPoint += player.Level;
             }
             //pokud počítadlo není na správné hodnotě tak ho jen inkrementuji
             else player.HealCounter++;
@@ -2443,10 +2472,19 @@ namespace game
         /// </summary>
         public List<Server> Servers = new List<Server>();
 
+        /// <summary>
+        /// List který drží všechny artefakty.
+        /// </summary>
         public List<Artifact> Artifacts = new List<Artifact>();
 
+        /// <summary>
+        /// Drží poslední pozici hráče pokud odejde do jiné lokace, až z ní vyleze může se objevit tam kde byl.
+        /// </summary>
         public int LastPositionX;
 
+        /// <summary>
+        /// Drží poslední pozici hráče pokud odejde do jiné lokace, až z ní vyleze může se objevit tam kde byl.
+        /// </summary>
         public int LastPositionY;
 
         /// <summary>
