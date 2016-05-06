@@ -2329,7 +2329,6 @@ namespace game
                     if (LevelUp == true)
                     {
                         Messenger.Update("Plácnutím moba jsi se levnul!");     //napíšu  něco trošku jiného
-                        player.HealthPoint = player.MaximumHealthPoint;         //doplním hráči HP ať to nemá tak složité
                     }
                     else Messenger.Update("Plácl jsi moba a ten to už nedal!"); //napíšu strohý epitaf mobovi
                 }
@@ -2417,8 +2416,9 @@ namespace game
             if (player.HealCounter == 5)
             {
                 player.HealCounter = 0;
-                //zároveň ale hráč musí být trošku zraněn, když bude mít max hp tak mu přeci přidávat nebudu
-                if (player.HealthPoint < player.MaximumHealthPoint) player.HealthPoint += player.Level;
+                //zároveň ale hráč musí být trošku zraněn, a když bude skoro naplno tak přidávám jen po jednom
+                if (player.HealthPoint < player.MaximumHealthPoint - player.Level * 2) player.HealthPoint += player.Level;
+                else if (player.HealthPoint < player.MaximumHealthPoint) player.HealthPoint++;                
             }
             //pokud počítadlo není na správné hodnotě tak ho jen inkrementuji
             else player.HealCounter++;

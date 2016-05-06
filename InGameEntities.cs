@@ -206,6 +206,8 @@ namespace game
                 Level++;
                 SetUpMaximumHealthPoint();
                 SetUpExperiencesForNextLevel();
+                //vyléčím hráče, ať to nemá moc těžké
+                HealthPoint = MaximumHealthPoint;
                 return true;
             }
             //jinak se vrací false
