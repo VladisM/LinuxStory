@@ -1,4 +1,22 @@
-﻿using System;
+﻿/*
+    Linux Story. Simple RPG game.
+    Copyright(C) 2016  Vladislav Mlejnecký
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.If not, see<http://www.gnu.org/licenses/>.
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -75,7 +93,13 @@ namespace game
                         Console.WriteLine("cow           - vykreslí místo tuxe kravičku (easter egg)");
                         Console.WriteLine("head-in       - vykreslí místo tuxe jinou kravičku (easter egg)");
 #endif
-                        Console.WriteLine("\n\nChyby v programu můžete hlásit na:\nv.mlejnecky@seznam.cz");
+                        Console.WriteLine("\n\nChyby v programu můžete hlásit na:\nv.mlejnecky@seznam.cz\n\n");
+
+                        Console.WriteLine("Linux Story. Copyright(C) 2016  Vladislav Mlejnecký");
+                        Console.WriteLine("This program comes with ABSOLUTELY NO WARRANTY.");
+                        Console.WriteLine("This is free software, and you are welcome to redistribute it");
+                        Console.WriteLine("under certain conditions; type `show c' for details.");
+
                         return -1;
                     default:
                         Console.WriteLine("Špatné použití, pro nápovědu zadej parametr help.");
