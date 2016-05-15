@@ -25,22 +25,40 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Reflection;
 
+/// <summary>
+/// Hlavní a jediný namespace který zde je.
+/// </summary>
 namespace game
 {
     /// <summary>
     /// Výčet stavů které vrací metoda hlavního menu.
     /// </summary>
+    /// <remarks>Slouží pro snažší práci s hlavním menu. Je použit jen tam.</remarks>
     enum MenuChoice { New, Load, Score, Story, Info, Help, Quit, Debug };
 
     /// <summary>
     /// Statická třída pro globální proměnné.
     /// </summary>
+    /// <remarks>Obsahuje globální proměné které umožňují upravovat chování aplikace.</remarks>
     static class Global
     {
+        /// <summary>
+        /// Globální proměnná pro uložení hry. Neměnit přímo, aplikace si ji mění sama u ukládání.
+        /// </summary>
         static public bool HaveToSave = false;
+        /// <summary>
+        /// Uložení pokynu pro černobílý výstup.
+        /// </summary>
+        /// <remarks>Pokud true -> grafika bude černobílá. Lze zadat z příkazové řádky.</remarks>
         static public bool Monochrome = false;
+        /// <summary>
+        /// Uložení pokynu pro easter egg tuxe v hlavním menu. :)
+        /// </summary>
         static public ConsoleStuffs.TuxChoise TuxArgumentFromCommandLine = ConsoleStuffs.TuxChoise.Tux;
 #if (EN_COLOR_REPAIR)
+        /// <summary>
+        /// Pro opravu barev při načtení staré hry z dob kdy ještě hra běžně neměla barvy.
+        /// </summary>
         static public bool RepairColors = false;
 #endif
     }
@@ -48,6 +66,7 @@ namespace game
     /// <summary>
     /// Hlavní třída celé hry, zde je umístěn Main().
     /// </summary>
+    /// <remarks>Toto je vstuní třída celé aplikace.</remarks>
     class Program
     {
         /// <summary>
@@ -58,7 +77,7 @@ namespace game
         /// <summary>
         /// Vstupní metoda programu.
         /// </summary>
-        /// <param name="args">Nejsou třeba.</param>
+        /// <param name="args">Nejsou třeba, argumenty z příkazové řádky.</param>
         static int Main(string[] args)
         {
             //budu postupně procházet všechny argumenty (když žádné nebudou tak se tohle neprovede)
