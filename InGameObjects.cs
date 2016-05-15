@@ -22,6 +22,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Hlavní a jediný namespace který zde je.
+/// </summary>
 namespace game
 {
     /// <summary>
@@ -35,6 +38,7 @@ namespace game
         /// <param name="PositionY">Pozice řádku.</param>
         /// <param name="PositionX">Pozice ve sloupci.</param>
         /// <param name="BodyChar">Tímto znakem bude artefakt ve světě vystupovat.</param>
+        /// <param name="ColorForPrint">Touto barvou se tento objekt vytiskne.</param>
         public Artifact(char BodyChar, int PositionY, int PositionX, ConsoleColor ColorForPrint)
         {
             this.PositionX = PositionX;
@@ -89,6 +93,7 @@ namespace game
         /// <param name="IsOpen">True jsou-li dveře otevřené.</param>
         /// <param name="PositionY">Pozice dveří v ose Y.</param>
         /// <param name="PositionX">Pozice dveří v ose X.</param>
+        /// <param name="ColorForPrint">Touto barvou se tento objekt vytiskne.</param>
         public Door(bool IsOpen, int PositionY, int PositionX, ConsoleColor ColorForPrint)
         {
             this.IsOpen = IsOpen;
@@ -125,6 +130,7 @@ namespace game
         /// <param name="PositionY">Pozice řádku.</param>
         /// <param name="PositionX">Pozice ve sloupci.</param>
         /// <param name="BodyChar">Tímto znakem bude voda ve světě vystupovat.</param>
+        /// <param name="ColorForPrint">Touto barvou se tento objekt vytiskne.</param>
         public Gate(char BodyChar, int PositionY, int PositionX, int Target, ConsoleColor ColorForPrint)
         {
             this.PositionX = PositionX;
@@ -151,6 +157,7 @@ namespace game
         /// <param name="PositionY">Pozice řádku.</param>
         /// <param name="PositionX">Pozice ve sloupci.</param>
         /// <param name="BodyChar">Tímto znakem bude voda ve světě vystupovat.</param>
+        /// <param name="ColorForPrint">Touto barvou se tento objekt vytiskne.</param>
         public Hill(char BodyChar, int PositionY, int PositionX, ConsoleColor ColorForPrint)
         {
             this.PositionX = PositionX;
@@ -181,6 +188,7 @@ namespace game
         /// <param name="PositionX">Pozice ve sloupci.</param>
         /// <param name="BodyChar">Tímto znakem bude voda ve světě vystupovat.</param>
         /// <param name="PowerNeeded">Potřebný power k instalaci linuxu.</param>
+        /// <param name="ColorForPrint">Touto barvou se tento objekt vytiskne.</param>
         public Server(char BodyChar, int PositionY, int PositionX, int PowerNeeded, ConsoleColor ColorForPrint)
         {
             this.PositionX = PositionX;
@@ -207,6 +215,7 @@ namespace game
         /// <param name="PositionY">Pozice řádku.</param>
         /// <param name="PositionX">Pozice ve sloupci.</param>
         /// <param name="BodyChar">Tímto znakem bude stromeček ve světě vystupovat.</param>
+        /// <param name="ColorForPrint">Touto barvou se tento objekt vytiskne.</param>
         public Tree(char BodyChar, int PositionY, int PositionX, ConsoleColor ColorForPrint)
         {
             this.PositionX = PositionX;
@@ -252,6 +261,7 @@ namespace game
         /// <param name="BodyChar">Znak  který se použije pro zobrazení objektu ve hře.</param>
         /// <param name="PositionY">Pozice objektu v ose X.</param>
         /// <param name="PositionX">Pozice objektu v ose Y.</param>
+        /// <param name="ColorForPrint">Touto barvou se tento objekt vytiskne.</param>
         public Wall(char BodyChar, int PositionY, int PositionX, ConsoleColor ColorForPrint)
         {
             this.PositionX = PositionX;
@@ -278,6 +288,7 @@ namespace game
         /// <param name="PositionY">Pozice řádku.</param>
         /// <param name="PositionX">Pozice ve sloupci.</param>
         /// <param name="BodyChar">Tímto znakem bude voda ve světě vystupovat.</param>
+        /// <param name="ColorForPrint">Touto barvou se tento objekt vytiskne.</param>
         public Watter(char BodyChar, int PositionY, int PositionX, ConsoleColor ColorForPrint)
         {
             this.PositionX = PositionX;

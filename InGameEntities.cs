@@ -22,6 +22,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Hlavní a jediný namespace který zde je.
+/// </summary>
 namespace game
 {
     /// <summary>
@@ -138,6 +141,7 @@ namespace game
         /// <param name="MaximalFreeMoveRadius">Určuje jak daleko se může entita pohybovat kolem sebe.</param>
         /// <param name="AgresiveRadius">Určuje na jakou délku se mob naštve a rozeběhne se po mě.</param>
         /// <param name="Level"></param>
+        /// <param name="ColorForPrint">Touto barvou se tento objekt vytiskne.</param>
         public NPC(char BodyChar, int PositionY, int PositionX, int Level, bool IsEvil, int MaximalFreeMoveRadius, int AgressiveRadius, ConsoleColor ColorForPrint)
         {
             this.BodyChar = BodyChar;
@@ -255,6 +259,7 @@ namespace game
         /// <param name="BodyChar">Znak kterým bude hráč ve světe vystupovat.</param>
         /// <param name="PositionY">Výchozí pozice hráče v ose Y.</param>
         /// <param name="PositionX">Výchozí pozice hráče v ose X.</param>
+        /// <param name="ColorForPrint">Touto barvou se tento objekt vytiskne.</param>
         public Player(string Player_Name, char BodyChar, int PositionY, int PositionX, ConsoleColor ColorForPrint)
         {
             Name = Player_Name;

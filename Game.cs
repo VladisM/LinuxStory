@@ -24,6 +24,9 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Reflection;
 
+/// <summary>
+/// Hlavní a jediný namespace který zde je.
+/// </summary>
 namespace game
 {
     /// <summary>
@@ -2509,6 +2512,9 @@ namespace game
         /// Tato metoda načte a parsuje soubor s mapou.
         /// </summary>
         /// <param name="FilePath">Relativní cesta k souboru.</param>
+        /// <param name="DefaultY">Výchozí pozice v mapě.</param>
+        /// <param name="DefaultX">Výchozí pozice v mapě.</param>
+        /// <param name="PowerForServers">Síla v celé lokaci potřebná pro instalaci serverů.</param>
         /// <returns>True pokud se povede, false pokud načtení selže.</returns>
         public bool LoadMap(string FilePath, int DefaultX, int DefaultY, int PowerForServers)
         {
