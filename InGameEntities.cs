@@ -139,8 +139,8 @@ namespace game
         /// <param name="PositionX">Výchozí pozice moba v ose X.</param>
         /// <param name="IsEvil">Rozhoduje o tom jestli je mob zlý nebo ne, jeli zlý bude mít agesivní UI.</param>
         /// <param name="MaximalFreeMoveRadius">Určuje jak daleko se může entita pohybovat kolem sebe.</param>
-        /// <param name="AgresiveRadius">Určuje na jakou délku se mob naštve a rozeběhne se po mě.</param>
-        /// <param name="Level"></param>
+        /// <param name="AgressiveRadius">Určuje na jakou délku se mob naštve.</param>
+        /// <param name="Level">Level moba.</param>
         /// <param name="ColorForPrint">Touto barvou se tento objekt vytiskne.</param>
         public NPC(char BodyChar, int PositionY, int PositionX, int Level, bool IsEvil, int MaximalFreeMoveRadius, int AgressiveRadius, ConsoleColor ColorForPrint)
         {

@@ -130,7 +130,8 @@ namespace game
         /// <param name="PositionY">Pozice řádku.</param>
         /// <param name="PositionX">Pozice ve sloupci.</param>
         /// <param name="BodyChar">Tímto znakem bude voda ve světě vystupovat.</param>
-        /// <param name="ColorForPrint">Touto barvou se tento objekt vytiskne.</param>
+        /// <param name="ColorForPrint">Barva kterou se brána posléze vytiskne.</param>
+        /// <param name="Target">Číslo cílové lokace.</param>
         public Gate(char BodyChar, int PositionY, int PositionX, int Target, ConsoleColor ColorForPrint)
         {
             this.PositionX = PositionX;
@@ -177,8 +178,14 @@ namespace game
     /// </summary>
     public class Server : Wall
     {
+        /// <summary>
+        /// Udržuje informaci o tom kolik je potřeba síly tuxe pro instalaci.
+        /// </summary>
         public int PowerNeeded;
 
+        /// <summary>
+        /// Udržuje inforamci o tom zdali je tento server již nainstalován.
+        /// </summary>
         public bool Installed = false;
 
         /// <summary>
@@ -215,7 +222,7 @@ namespace game
         /// <param name="PositionY">Pozice řádku.</param>
         /// <param name="PositionX">Pozice ve sloupci.</param>
         /// <param name="BodyChar">Tímto znakem bude stromeček ve světě vystupovat.</param>
-        /// <param name="ColorForPrint">Touto barvou se tento objekt vytiskne.</param>
+        /// <param name="ColorForPrint">Touto barvou se stromček vytiskne.</param>
         public Tree(char BodyChar, int PositionY, int PositionX, ConsoleColor ColorForPrint)
         {
             this.PositionX = PositionX;

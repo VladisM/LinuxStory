@@ -2043,6 +2043,7 @@ namespace game
         /// <param name="MovingEntity">Entita se kterou je třeba hýbat.</param>
         /// <param name="MoveY">Plánovaný pohyb v ose Y.</param>
         /// <param name="MoveX">Plánovaný pohyb v ose X.</param>
+        /// <param name="MobNumber">Číslo moba se kterým hýbu, přeskočí se v prochízení listu.</param>
         /// <returns>True pokud se pohyb entity povedl.</returns>
         private bool MoveIfPossible(NPC MovingEntity, int MoveY, int MoveX, int MobNumber)
         {
@@ -2073,6 +2074,7 @@ namespace game
         /// </summary>
         /// <param name="Entity">Entita kterou bude UI řídit.</param>
         /// <param name="PlayerEntity">Entita hráče, pokud je UI zlá, tj mob je agresivní, půjde UI po této entitě.</param>
+        /// <param name="MobNumber">Číslo entity moba, předává se metodě MoveIfPosible. </param>
         private void UI_Move(NPC Entity, Player PlayerEntity, int MobNumber)
         {
             // když máme zlou entitu tak budeme zlí
@@ -2423,14 +2425,14 @@ namespace game
 
         }
 
-//------------------------------------------------------------------------------------------------------
-//      Následují všeobecné funkce.
-//------------------------------------------------------------------------------------------------------
-        
+        //------------------------------------------------------------------------------------------------------
+        //      Následují všeobecné funkce.
+        //------------------------------------------------------------------------------------------------------
+
         /// <summary>
         /// Metoda pro občasné léčení hráče. Hráč má svoje počítadlo.
-        /// <param name="player">Sem potřebuji objekt hráče který bude léčen.</param>
         /// </summary>
+        /// <param name="player">Sem potřebuji objekt hráče který bude léčen.</param>
         private void HealPlayer(Player player)
         {
             //pokud je počítadlo na správné hodnotě tak trošku vyléčím hráče.

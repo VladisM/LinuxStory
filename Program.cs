@@ -46,15 +46,18 @@ namespace game
         /// Globální proměnná pro uložení hry. Neměnit přímo, aplikace si ji mění sama u ukládání.
         /// </summary>
         static public bool HaveToSave = false;
+        
         /// <summary>
         /// Uložení pokynu pro černobílý výstup.
         /// </summary>
         /// <remarks>Pokud true -> grafika bude černobílá. Lze zadat z příkazové řádky.</remarks>
         static public bool Monochrome = false;
+        
         /// <summary>
         /// Uložení pokynu pro easter egg tuxe v hlavním menu. :)
         /// </summary>
         static public ConsoleStuffs.TuxChoise TuxArgumentFromCommandLine = ConsoleStuffs.TuxChoise.Tux;
+
 #if (EN_COLOR_REPAIR)
         /// <summary>
         /// Pro opravu barev při načtení staré hry z dob kdy ještě hra běžně neměla barvy.
@@ -78,6 +81,7 @@ namespace game
         /// Vstupní metoda programu.
         /// </summary>
         /// <param name="args">Nejsou třeba, argumenty z příkazové řádky.</param>
+        /// <returns>Vrací pár čísel -1 pro chybné ukončení, 1 pro korektní.</returns>
         static int Main(string[] args)
         {
             //budu postupně procházet všechny argumenty (když žádné nebudou tak se tohle neprovede)
@@ -119,7 +123,7 @@ namespace game
                         Console.WriteLine("This is free software, and you are welcome to redistribute it");
                         Console.WriteLine("under certain conditions; type `show c' for details.");
 
-                        return -1;
+                        return 1;
                     default:
                         Console.WriteLine("Špatné použití, pro nápovědu zadej parametr help.");
                         return -1;
@@ -412,7 +416,8 @@ namespace game
         /// <summary>
         /// Vytvoí okno s nabídkou uloženýc her a vezme volbu od uživatele kterou nahrát.
         /// </summary>
-        /// <returns>Název souboru s uloženou hrou k nahrání.</returns>
+        /// <param name="SaveForLoad">Vrací název světa který se načte.</param>
+        /// <returns>True pokud se bude načítat.</returns>
         private static bool DrawLoadMenu(out string SaveForLoad)
         {
             Console.Clear();
@@ -737,6 +742,10 @@ namespace game
         /// <summary>
         /// Metoda pro výpočet ohodnocení pozice, takto můžu porovnávat více záznamů jedním číslem.
         /// </summary>
+        /// <param name="Exp">Expy pozice.</param>
+        /// <param name="InstalledServers">Počet nainstalovaných serverů.</param>
+        /// <param name="Lvl">Lelely pozice.</param>
+        /// <param name="TuxPower">Síle tuxe pozice.</param>
         /// <returns>Hodnocení dané položky.</returns>
         static private int CalcRankForItem(int Lvl, int TuxPower, int Exp, int InstalledServers)
         {
@@ -870,7 +879,7 @@ namespace game
         /// <summary>
         /// Metoda pro načtení uložené hry pro zadaného hráče.
         /// </summary>
-        /// <param name="Name"></param>
+        /// <param name="Name">Jméno save-filu pro načtení.</param>
         /// <returns>True pokud se načtení povede.</returns>
         static public bool Load(string Name)
         {

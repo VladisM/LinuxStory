@@ -175,6 +175,7 @@ namespace game
         /// <param name="TextForPrint">Text který bude tisknut. Musí se do konzole vejít.</param>
         /// <param name="PositionY">Sloupec na který se umístí první písmeno.</param>
         /// <param name="PositionX">Řádek na který se umístí první písmeno.</param>
+        /// <param name="Color">Barva pro tisk.</param>
         public static void TextPrint(string TextForPrint, int PositionY, int PositionX, ConsoleColor Color)
         {
             //ošetření proti tisku ničeho
@@ -196,7 +197,7 @@ namespace game
         /// Tisk textu do konzole na přesně zadanou pozici.
         /// </summary>
         /// <param name="TextForPrint">Text který bude tisknut. Musí se do konzole vejít.</param>
-        /// <param name="column">Sloupec na který se umístí první písmeno.</param>
+        /// <param name="PositionX">Sloupec do kterého se umístí první písmeno.</param>
         /// <param name="PositionY">Řádek na který se umístí první písmeno.</param>
         public static void TextPrint(char TextForPrint, int PositionY, int PositionX)
         {
