@@ -210,7 +210,6 @@ namespace game
         /// Tisk textu do konzole na přesně zadanou pozici vybranou barvou.
         /// </summary>
         /// <param name="TextForPrint">Text který bude tisknut. Musí se do konzole vejít.</param>
-        /// <param name="column">Sloupec na který se umístí první písmeno.</param>
         /// <param name="PositionY">Řádek na který se umístí první písmeno.</param>
         /// <param name="PositionX">Sloupec na který se umístí text.</param>
         /// <param name="Color">Barva kterou se text vytiskne.</param>
@@ -234,11 +233,38 @@ namespace game
         {
             Console.Clear();
             DrawFrame();
-            TextPrint("So long...", 5, 20);
-            TextPrint("and thank's for all the fish!", 6, 30);
+            TextPrint("So long...", 5, 15);
+            TextPrint("and thank's for all the fish!", 6, 20);
             TextPrint("Pro ukončení stiskni enter...", 28, 2);
+            int i = 2;
+            TextPrint(@"     :;", i++, 50);
+            TextPrint(@"     ''''", i++, 50);
+            TextPrint(@"     ''''", i++, 50);
+            TextPrint(@"     ''';", i++, 50);
+            TextPrint(@"     '''`", i++, 50);
+            TextPrint(@"     '''", i++, 50);
+            TextPrint(@"     '''                 ''", i++, 50);
+            TextPrint(@"    .'''                ''';", i++, 50);
+            TextPrint(@"    ;'''               ''''", i++, 50);
+            TextPrint(@"    '''.              ,'''.", i++, 50);
+            TextPrint(@"    '''               '''`", i++, 50);
+            TextPrint(@"    '''               '''", i++, 50);
+            TextPrint(@"    '''               ''''", i++, 50);
+            TextPrint(@"   .'''                ''''.", i++, 50);
+            TextPrint(@"   ;'':                 ''''.", i++, 50);
+            TextPrint(@"   '''    :+@@@@@@@@@',  ''''", i++, 50);
+            TextPrint(@"   '''@@@@@@+'''''@@@@@@@@'''`", i++, 50);
+            TextPrint(@"   '''@@+'''''''''@@@@@@@@''';", i++, 50);
+            TextPrint(@"  @'''''''''''''''@@@@@@@#'''@@", i++, 50);
+            TextPrint(@" #@''''''''@@@@@@@@@@@@'''''@@@,", i++, 50);
+            TextPrint(@" :@+'''#@@@@@@@@@@@@@@+''''#@@@`", i++, 50);
+            TextPrint(@"  +@@@@@@@@@@@@@@@@@@@@'''@@@@:", i++, 50);
+            TextPrint(@"    @@@@@@@@@@@@@@@@@@@@@@@@+", i++, 50);
+            TextPrint(@"       +@@@@@@@@@@@@@@@@@'", i++, 50);
+            TextPrint(@"             .,::,..", i++, 50);
             Console.SetCursorPosition(0, 0);
             Console.ReadLine();
+            Console.SetCursorPosition(0, 0);
         }
 
         /// <summary>
