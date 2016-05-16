@@ -22,9 +22,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/// <summary>
-/// Hlavní a jediný namespace který zde je.
-/// </summary>
 namespace game
 {
     /// <summary>

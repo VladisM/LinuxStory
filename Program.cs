@@ -25,9 +25,6 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Reflection;
 
-/// <summary>
-/// Hlavní a jediný namespace který zde je.
-/// </summary>
 namespace game
 {
     /// <summary>
