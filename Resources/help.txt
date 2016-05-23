@@ -34,11 +34,11 @@ lokacích, hlavní svět je více méně jen pro transport mezi nimi.
 
 4. OVLÁDÁNÍ
 W A S D  - Pohyb hráče.
-T		 - Útok na nejbližší NPC.
-O		 - Otevřít nebo zavřít dveře.
-G		 - Brána, projít bránou.
-P		 - Modlení se k artefaktu.
-I		 - Instalace linuxu.
+T        - Útok na nejbližší NPC.
+O        - Otevřít nebo zavřít dveře.
+G        - Brána, projít bránou.
+P        - Modlení se k artefaktu.
+I        - Instalace linuxu.
 
 5. OBJEKTY A NPC
 různé objekty           hodní NPC           zlí NPC
