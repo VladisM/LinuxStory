@@ -118,7 +118,7 @@ namespace game
                         Console.WriteLine("Linux Story. Copyright(C) 2016  Vladislav Mlejnecký");
                         Console.WriteLine("This program comes with ABSOLUTELY NO WARRANTY.");
                         Console.WriteLine("This is free software, and you are welcome to redistribute it");
-                        Console.WriteLine("under certain conditions; type `show c' for details.");
+                        Console.WriteLine("under certain conditions.");
 
                         return 1;
                     default:
